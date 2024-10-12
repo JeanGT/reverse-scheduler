@@ -1,15 +1,77 @@
 jQuery(document).ready(function($) {
-    moment.locale('fr');
-    var now = moment();
-    $('#calendar').Calendar({
-        events: [
-            { // An event on the current week on Wednesday from 10h to 12h
-              start: now.startOf('week').isoWeekday(3).startOf('day').add(10, 'h'),
-              end: now.startOf('week').isoWeekday(3).startOf('day').add(12, 'h'),
-              title: 'An event title !',
-              content: 'Hello World! <br>Foo Bar<p class="text-right">Wow this text is right aligned !</p>',
-              category: 'A test category name'
-            }
-          ]
-    }).init();
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialDate: '2023-01-12',
+      initialView: 'timeGridWeek',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      },
+      height: 'auto',
+      navLinks: true, // can click day/week names to navigate views
+      editable: true, // Enables drag-and-drop for events
+      selectable: true, // Enables selecting to create events
+      selectMirror: true,
+      nowIndicator: true, // Shows a "current time" line
+      events: [
+        {
+          title: 'All Day Event',
+          start: '2023-01-01',
+        },
+        {
+          title: 'Long Event',
+          start: '2023-01-07',
+          end: '2023-01-10'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2023-01-09T16:00:00'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2023-01-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2023-01-11',
+          end: '2023-01-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2023-01-12T10:30:00',
+          end: '2023-01-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2023-01-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2023-01-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2023-01-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2023-01-12T20:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2023-01-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2023-01-28'
+        }
+      ]
+    });
+
+    calendar.render();
 });

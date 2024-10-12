@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class ReverseScheduler {
     public function __construct() {
-        add_action( 'wp_enqueue_scripts', array( $this, 'load_jquery_calendar' ) );
+        add_action( 'wp_enqueue_scripts', array( $this, 'load_full_calendar' ) );
     }
 
     public function activate() {
@@ -32,18 +32,12 @@ class ReverseScheduler {
        
     }
 
-    public function load_jquery_calendar() {
-        // Enqueue Bootstrap and jQuery if not already loaded
-        wp_enqueue_style( 'bootstrap-css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' );
-        wp_enqueue_script( 'jquery' );
-        wp_enqueue_script( 'bootstrap-js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array('jquery'), null, true );
+    public function load_full_calendar() {        
+        // FullCalendar JS
+        wp_enqueue_script( 'fullcalendar-js', plugin_dir_url(__FILE__) . 'assets/full-calendar/index.global.js', array('jquery'), null, true );
         
-        // Enqueue the calendar CSS and JS
-        wp_enqueue_style( 'calendar-css', plugin_dir_url(__FILE__) . 'assets/jquery-calendar-bs4/css/jquery-calendar.min.css' );
-        wp_enqueue_script( 'calendar-js', plugin_dir_url(__FILE__) . 'assets/jquery-calendar-bs4/js/jquery-calendar.min.js', array('jquery'), null, true );
-    
-        // Enqueue the calendar initialization script
-        wp_enqueue_script( 'calendar-init', plugin_dir_url(__FILE__) . 'assets/calendar-init.js', array('jquery', 'calendar-js'), null, true );
+        // Enqueue the custom initialization script
+        wp_enqueue_script( 'fullcalendar-init', plugin_dir_url(__FILE__) . 'assets/calendar-init.js', array('jquery', 'fullcalendar-js'), null, true );
     }
 }
 
