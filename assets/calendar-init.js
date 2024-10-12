@@ -4,18 +4,20 @@ jQuery(document).ready(function ($) {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
         headerToolbar: {
-            left: 'prev,next today',
-            center: 'title'
+            left: '',
+            center: ''
         },
         locale: 'pt-br',
         height: 'auto',
-        navLinks: false,
         editable: true,
         selectable: true,
         selectMirror: true,
         nowIndicator: true,
         unselectAuto: false,
-
+        slotMinTime: '08:00:00',
+        slotMaxTime: '18:00:00',
+        allDayText: 'Dia todo',
+        dayHeaderFormat: { day: '2-digit', month: '2-digit' },
         // Function to handle creating new events on select
         select: function (info) {
             calendar.addEvent({
